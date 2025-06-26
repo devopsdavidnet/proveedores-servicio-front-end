@@ -1,0 +1,65 @@
+/* FORMULARIO */
+.responsive-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  width: 100%;
+}
+
+/* mat-tab-group al 100% */
+.full-tab-group {
+  width: 100%;
+}
+
+/* CONTENIDO DENTRO DEL TAB */
+.tab-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  width: 100%;
+}
+
+/* FORM FIELDS */
+.full-width {
+  width: 85%;
+  
+}
+
+/* BOTONES */
+.botones {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  width: 90%;
+  max-width: 800px;
+}
+
+/* MÓVIL */
+@media (max-width: 600px) {
+  .full-width,
+  .botones {
+    width: 100%;
+    padding: 0 0.5rem;
+  }
+
+  .botones {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .tab-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* ICONO EN LA PESTAÑA */
+.tab-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+  vertical-align: middle;
+}

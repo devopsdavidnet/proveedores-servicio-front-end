@@ -1,0 +1,89 @@
+<form [formGroup]="form" class="responsive-form" (ngSubmit)="onSubmit()">
+  <mat-tab-group
+    [(selectedIndex)]="selectedIndex"
+    (selectedTabChange)="onTabChange($event)"
+    class="full-tab-group"
+  >
+    <!-- TAB 1 -->
+    <mat-tab label="1. Información General">
+      <div class="tab-content">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="nombre" />
+          <mat-error
+            *ngIf="form.get('nombre')?.invalid && form.get('nombre')?.touched"
+          >
+            Campo requerido
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Correo electrónico</mat-label>
+          <input matInput type="email" formControlName="email" />
+          <mat-error
+            *ngIf="form.get('email')?.invalid && form.get('email')?.touched"
+          >
+            Correo inválido
+          </mat-error>
+        </mat-form-field>
+
+        <mat-checkbox formControlName="tieneSMS" (change)="onSMSChange($event)">
+          ¿Cuenta con SMS?
+        </mat-checkbox>
+
+        <div class="botones">
+          <button mat-raised-button color="primary" (click)="goToNextTab(1)">
+            Siguiente
+          </button>
+        </div>
+      </div>
+    </mat-tab>
+
+    <!-- TAB 2 -->
+    <mat-tab label="2. Información Adicional">
+      <div class="tab-content">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="telefono" />
+          <mat-error
+            *ngIf="
+              form.get('telefono')?.invalid && form.get('telefono')?.touched
+            "
+          >
+            Teléfono requerido
+          </mat-error>
+        </mat-form-field>
+
+        <div class="botones">
+          <button mat-stroked-button (click)="goToPreviousTab()">
+            Anterior
+          </button>
+          <button mat-raised-button color="primary" (click)="goToNextTab(2)">
+            Siguiente
+          </button>
+        </div>
+      </div>
+    </mat-tab>
+
+    <!-- TAB 3 -->
+    <mat-tab label="3. Confirmación">
+      <div class="tab-content">
+        <p>Gracias. Ya puedes enviar el formulario.</p>
+
+        <div class="botones">
+          <button mat-stroked-button (click)="goToPreviousTab()">
+            Anterior
+          </button>
+          <button
+            mat-raised-button
+            color="accent"
+            type="submit"
+            [disabled]="form.invalid"
+          >
+            Enviar
+          </button>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</form>

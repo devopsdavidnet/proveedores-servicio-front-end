@@ -1,0 +1,36 @@
+<h2 mat-dialog-title>Formulario SMS</h2>
+
+<form [formGroup]="smsForm" (ngSubmit)="onSubmit()" class="dialog-form">
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Responsable del SMS</mat-label>
+    <input matInput formControlName="responsable" />
+    <mat-error *ngIf="smsForm.get('responsable')?.invalid"
+      >Campo requerido</mat-error
+    >
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Fecha de implementación</mat-label>
+    <input matInput type="date" formControlName="fechaImplementacion" />
+    <mat-error *ngIf="smsForm.get('fechaImplementacion')?.invalid"
+      >Campo requerido</mat-error
+    >
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Nivel de madurez</mat-label>
+    <mat-select formControlName="nivelMadurez">
+      <mat-option value="básico">Básico</mat-option>
+      <mat-option value="intermedio">Intermedio</mat-option>
+      <mat-option value="avanzado">Avanzado</mat-option>
+    </mat-select>
+    <mat-error *ngIf="smsForm.get('nivelMadurez')?.invalid"
+      >Campo requerido</mat-error
+    >
+  </mat-form-field>
+
+  <div mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="onCancel()">Cancelar</button>
+    <button mat-raised-button color="primary" type="submit">Guardar</button>
+  </div>
+</form>
