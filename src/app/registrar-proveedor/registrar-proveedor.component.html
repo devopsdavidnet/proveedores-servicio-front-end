@@ -1,85 +1,348 @@
-<form [formGroup]="form" class="responsive-form" (ngSubmit)="onSubmit()">
-  <mat-tab-group
-    [(selectedIndex)]="selectedIndex"
-    (selectedTabChange)="onTabChange($event)"
-    class="full-tab-group"
-  >
+<form [formGroup]="form">
+  <mat-tab-group [(selectedIndex)]="selectedIndex">
     <!-- TAB 1 -->
-    <mat-tab label="1. Información General">
+    <mat-tab
+      [disabled]="!tabEnabled[0]"
+      label="1. Información General de la Organización"
+    >
+      <ng-template mat-tab-label>
+        <img src="assets/images/information.png" width="22" height="22" />
+        1. Información General de la Organización
+      </ng-template>
+
       <div class="tab-content">
-        <mat-form-field appearance="fill" class="full-width">
-          <mat-label>Nombre</mat-label>
-          <input matInput formControlName="nombre" />
-          <mat-error
-            *ngIf="form.get('nombre')?.invalid && form.get('nombre')?.touched"
-          >
-            Campo requerido
-          </mat-error>
+        <mat-form-field class="full-width">
+          <mat-label>Nombre o Razón de la Organización/Entiad </mat-label>
+          <input matInput formControlName="nombre_organizacion" />
         </mat-form-field>
 
-        <mat-form-field appearance="fill" class="full-width">
-          <mat-label>Correo electrónico</mat-label>
-          <input matInput type="email" formControlName="email" />
-          <mat-error
-            *ngIf="form.get('email')?.invalid && form.get('email')?.touched"
-          >
-            Correo inválido
-          </mat-error>
+        <mat-form-field class="full-width">
+          <mat-label>Tipo de Proveedor de Servicios</mat-label>
+          <mat-select formControlName="tipo_explotador">
+            <mat-option value="1">EXPLOTADOR AEREO - AOC </mat-option>
+            <mat-option value="2">ORGANIZACION DE MANTENIMIENTO </mat-option>
+            <mat-option value="3"
+              >CENTRO DE INSTRUCCIÓN DE AERONAUTICA CIVIL - CIAC
+            </mat-option>
+            <mat-option value="4">OPERADOR AEREO (RAB 91)</mat-option>
+            <mat-option value="5">OPERADOR DE AERODROMO (RAB 139)</mat-option>
+            <mat-option value="6"
+              >PROVEEDOR DE SERVICIOS NAVEGACIÓN AEREA (RAB211)</mat-option
+            >
+            <mat-option value="7">OTRO</mat-option>
+          </mat-select>
         </mat-form-field>
 
-        <mat-checkbox formControlName="tieneSMS" (change)="onSMSChange($event)">
-          ¿Cuenta con SMS?
-        </mat-checkbox>
+        <mat-form-field
+          *ngIf="form.get('tipo_explotador')?.value === '7'"
+          class="full-width"
+        >
+          <mat-label>Otro tipo de Proveedor</mat-label>
+          <input matInput formControlName="otro_tipo_proveedor" />
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label
+            >Departamento de ubicación de la Base Principal de la
+            Organización/Entidad
+          </mat-label>
+          <mat-select formControlName="departamento">
+            <mat-option value="1">LA PAZ</mat-option>
+            <mat-option value="2">COCHABAMBA</mat-option>
+            <mat-option value="3">SANTA CRUZ</mat-option>
+            <mat-option value="4">BENI</mat-option>
+            <mat-option value="5">PANDO</mat-option>
+            <mat-option value="6">ORURO</mat-option>
+            <mat-option value="7">POTOSI</mat-option>
+            <mat-option value="8">CHUQUISACA</mat-option>
+            <mat-option value="9">TARIJA</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label
+            >Dirección de ubicación Base Principal de la Organización/Entidad
+          </mat-label>
+          <input matInput formControlName="direccion_organizacion" />
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label
+            >Teléfono de principal de contacto de la Organización/Entidad
+          </mat-label>
+          <input
+            matInput
+            type="number"
+            formControlName="telefono_organizacion"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label
+            >Correo electronico principal de contacto de la Organización/Entidad
+          </mat-label>
+          <input matInput formControlName="correo_organizacion" />
+        </mat-form-field>
 
         <div class="botones">
-          <button mat-raised-button color="primary" (click)="goToNextTab(1)">
-            Siguiente
+          <button mat-raised-button color="primary" (click)="goToNextTab()">
+            Siguiente ->>
           </button>
         </div>
       </div>
     </mat-tab>
 
     <!-- TAB 2 -->
-    <mat-tab label="2. Información Adicional">
+    <mat-tab label="2. Contacto">
+      <ng-template mat-tab-label>
+        <img src="assets/images/certificate.png" width="22" height="22" />
+        2. Certificación
+      </ng-template>
       <div class="tab-content">
-        <mat-form-field appearance="fill" class="full-width">
+        <mat-form-field class="full-width">
+          <mat-label
+            >Fecha de la Certificación Inicial de la
+            Organización/Entidad</mat-label
+          >
+          <input
+            matInput
+            type="date"
+            formControlName="fecha_inicial_certificacion"
+          />
+          <mat-error *ngIf="form.get('fecha_inicial_certificacion')?.invalid"
+            >Campo requerido</mat-error
+          >
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label *ngIf="['1'].includes(form.get('tipo_explotador')?.value)">
+            Fecha de expiración de Permiso de Operación
+          </mat-label>
+          <mat-label
+            *ngIf="!['1'].includes(form.get('tipo_explotador')?.value)"
+          >
+            Fecha de expiración de la Certificación Vigente de la
+            Organización/Entidad
+          </mat-label>
+
+          <input
+            matInput
+            type="date"
+            formControlName="fecha_expiracion_certificacion"
+          />
+          <mat-error *ngIf="form.get('fecha_expiracion_certificacion')?.invalid"
+            >Campo requerido</mat-error
+          >
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label
+            >Numero de Certificado emtido por la DGAC a Organización/Entidad
+          </mat-label>
+          <input matInput formControlName="numero_certificado" />
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label
+            >Numero de Resolución Administrativa emtido por la DGAC
+          </mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label
+            >Regulación aplicable a la Clase de Certificación otorgada o
+            aplicable a la Organización/Entidad
+          </mat-label>
+          <mat-select formControlName="resolucion_tipo_organizacion">
+            <mat-option value="1">RAB 91</mat-option>
+            <mat-option value="2">RAB 121</mat-option>
+            <mat-option value="3">RAB 135</mat-option>
+            <mat-option value="4">RAB 133</mat-option>
+            <mat-option value="5">RAB 139</mat-option>
+            <mat-option value="6">RAB 145</mat-option>
+            <mat-option value="7">RAB 211</mat-option>
+            <mat-option value="8">RAB 141</mat-option>
+            <mat-option value="9">RAB 142</mat-option>
+            <mat-option value="10">RAB 147</mat-option>
+            <mat-option value="11">Otro</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field
+          *ngIf="form.get('resolucion_tipo_organizacion')?.value === '11'"
+          class="full-width"
+        >
+          <mat-label>Otro regulacion aplicada</mat-label>
+          <input matInput formControlName="otro_resolucion_tipo_organizacion" />
+        </mat-form-field>
+
+        <mat-form-field
+          class="full-width"
+          *ngIf="['3'].includes(form.get('tipo_explotador')?.value)"
+        >
+          <mat-label>Tipo de Operación de la Organización/Entidad</mat-label>
+          <mat-select formControlName="tipo_operacion">
+            <mat-option value="1">Regular</mat-option>
+
+            <mat-option value="2">No Regular</mat-option>
+            <mat-option value="3">Aviación General</mat-option>
+            <mat-option value="4">Trabajo Aéreo</mat-option>
+            <mat-option value="5">Entrenamiento</mat-option>
+
+            <mat-option value="6">Mantenimiento</mat-option>
+            <mat-option value="7">Otro</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field
+          *ngIf="form.get('tipo_operacion')?.value === '7'"
+          class="full-width"
+        >
+          <mat-label>Otro tipo de Operación</mat-label>
+          <input matInput formControlName="otro_tipo_operacion" />
+        </mat-form-field>
+
+        <mat-form-field
+          class="full-width"
+          *ngIf="['1', '3'].includes(form.get('tipo_explotador')?.value)"
+        >
+          <mat-label
+            >Tipo de Transporte Aereo Comercial de la Organización/Entidad
+          </mat-label>
+          <mat-select formControlName="tipo_transporte_aereo">
+            <mat-option value="1">Pasajero</mat-option>
+            <mat-option value="2">Carga</mat-option>
+            <mat-option value="3">Pasajero y Carga</mat-option>
+            <mat-option value="4">Otro</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field
+          *ngIf="form.get('tipo_transporte_aereo')?.value === '4'"
+          class="full-width"
+        >
+          <mat-label>Otro tipo transporte Aéreo</mat-label>
+          <input matInput formControlName="otro_tipo_transporte_aereo" />
+        </mat-form-field>
+
+        <mat-checkbox
+          formControlName="tiene_sms"
+          class="full-width"
+          (change)="onSMSChange($event)"
+        >
+          Fecha de Aceptación Inicial del SMS
+        </mat-checkbox>
+
+        <!--  si la respuesta es SI" -->
+        <mat-form-field *ngIf="form.get('tiene_sms')?.value" class="full-width">
+          <mat-label>Fecha de Aceptación Inicial del SMS</mat-label>
+          <input matInput type="date" formControlName="fecha_aceptacion_sms" />
+        </mat-form-field>
+
+        <!--Especificaciones relativas a las operacinones 
+   operaciones especificas otorgandas al organizacion-->
+        <div *ngIf="['1'].includes(form.get('tipo_explotador')?.value)">
+          <label class="section-label">
+            Aprobaciones específicas otorgadas a la Organización/Entidad </label
+          ><br />
+          <mat-checkbox formControlName="especificacion1">EDTO</mat-checkbox>
+          <mat-checkbox formControlName="especificacion2">PBN</mat-checkbox>
+          <mat-checkbox formControlName="especificacion3"
+            >CAT II/III</mat-checkbox
+          >
+          <mat-checkbox formControlName="especificacion4">EFB</mat-checkbox>
+          <mat-checkbox formControlName="especificacion5">RVSM</mat-checkbox>
+          <mat-checkbox formControlName="especificacion6"
+            >Mercancias Peligrosas</mat-checkbox
+          >
+          <mat-checkbox formControlName="especificacion7"
+            >Línea Larga</mat-checkbox
+          >
+          <mat-checkbox formControlName="especificacion8"
+            >Línea Larga</mat-checkbox
+          >
+          <mat-checkbox formControlName="especificacion9"
+            >Grúa de Rescate</mat-checkbox
+          >
+          <mat-checkbox formControlName="especificacion10">HETS</mat-checkbox>
+          <mat-checkbox formControlName="especificacion11"
+            >MEDEVAC</mat-checkbox
+          >
+          <mat-checkbox formControlName="especificacion12"
+            >NO POSEE APROBACIÓN ESPECIFICA OTORGADA</mat-checkbox
+          >
+
+          <mat-checkbox formControlName="especificacion13">Otro</mat-checkbox>
+
+          <mat-form-field
+            *ngIf="form.get('especificacion13')?.value"
+            class="full-width"
+          >
+            <mat-label>Otro tipo transporte Aéreo</mat-label>
+            <input matInput formControlName="otra_especificaciones" />
+          </mat-form-field>
+        </div>
+
+        <button mat-raised-button class="btn-img" (click)="registroAeronaves()">
+          <img
+            src="assets/images/jet_plane_1.png"
+            alt="Adicionar"
+            class="btn-icon"
+          />
+          Registrar Datos de Aeronaves
+        </button>
+
+        <mat-form-field class="full-width">
           <mat-label>Teléfono</mat-label>
           <input matInput formControlName="telefono" />
-          <mat-error
-            *ngIf="
-              form.get('telefono')?.invalid && form.get('telefono')?.touched
-            "
-          >
-            Teléfono requerido
-          </mat-error>
         </mat-form-field>
 
         <div class="botones">
-          <button mat-stroked-button (click)="goToPreviousTab()">
-            Anterior
-          </button>
-          <button mat-raised-button color="primary" (click)="goToNextTab(2)">
-            Siguiente
+          <button mat-button (click)="goToPreviousTab()"><<- Anterior</button>
+          <button mat-raised-button color="primary" (click)="goToNextTab()">
+            Siguiente ->>
           </button>
         </div>
       </div>
     </mat-tab>
 
     <!-- TAB 3 -->
-    <mat-tab label="3. Confirmación">
+    <mat-tab label="3. Dirección" [disabled]="!tabEnabled[2]">
+      <ng-template mat-tab-label>
+        <img src="assets/images/organizacion.png" width="22" height="22" />
+        3. Características de la Organización
+      </ng-template>
+
       <div class="tab-content">
-        <p>Gracias. Ya puedes enviar el formulario.</p>
+        <mat-form-field class="full-width">
+          <mat-label>Ciudad</mat-label>
+          <input matInput formControlName="ciudad" />
+        </mat-form-field>
 
         <div class="botones">
-          <button mat-stroked-button (click)="goToPreviousTab()">
-            Anterior
+          <button mat-button (click)="goToPreviousTab()"><<- Anterior</button>
+          <button mat-raised-button color="primary" (click)="goToNextTab()">
+            Siguiente ->>
           </button>
-          <button
-            mat-raised-button
-            color="accent"
-            type="submit"
-            [disabled]="form.invalid"
-          >
+        </div>
+      </div>
+    </mat-tab>
+
+    <!-- TAB 4 -->
+    <mat-tab label="4. Finalizar" [disabled]="!tabEnabled[3]">
+      <ng-template mat-tab-label>
+        <img src="assets/images/administrator.png" width="22" height="22" />
+        4.- Personal Directorio y Técnico
+      </ng-template>
+      <div class="tab-content">
+        <mat-form-field class="full-width">
+          <mat-label>País</mat-label>
+          <input matInput formControlName="pais" />
+        </mat-form-field>
+
+        <div class="botones">
+          <button mat-button (click)="goToPreviousTab()">Anterior</button>
+          <button mat-raised-button color="accent" (click)="onSubmit()">
             Enviar
           </button>
         </div>

@@ -63,3 +63,18 @@
   margin-right: 6px;
   vertical-align: middle;
 }
+
+.btn-img {
+  display: flex;
+  
+   
+  
+  justify-content: flex-start; /* Alinea a la izquierda */
+  margin-bottom: 1rem;
+}
+
+.btn-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}

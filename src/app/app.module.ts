@@ -25,6 +25,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SmsDialogComponent } from './sms-dialog/sms-dialog.component';
+import { RegistroAeronavesComponent } from './registro-aeronaves/registro-aeronaves.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { SmsDialogComponent } from './sms-dialog/sms-dialog.component';
     PlantillaComponent,
     RegistrarProveedorComponent,
     HomeComponent,
-    SmsDialogComponent
+    SmsDialogComponent,
+    RegistroAeronavesComponent
   ],
   imports: [
     BrowserModule,
