@@ -27,8 +27,10 @@ export class SmsDialogComponent {
 
   onSubmit(): void {
     if (this.smsForm.valid) {
+       console.log("entro por si");
       this.dialogRef.close(this.smsForm.value);
     } else {
+      console.log("Entro por no");
       this.smsForm.markAllAsTouched();
     }
   }

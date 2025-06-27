@@ -26,7 +26,7 @@ import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SmsDialogComponent } from './sms-dialog/sms-dialog.component';
 import { RegistroAeronavesComponent } from './registro-aeronaves/registro-aeronaves.component';
-
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -47,6 +47,7 @@ import { RegistroAeronavesComponent } from './registro-aeronaves/registro-aerona
     MatToolbarModule,
     MatListModule,
     MatCardModule,
+    MatTooltipModule,
 
 
     

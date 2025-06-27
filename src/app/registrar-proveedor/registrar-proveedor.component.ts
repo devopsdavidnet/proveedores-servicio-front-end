@@ -168,16 +168,17 @@ goToNextTab(): void {
   }
 
   onSMSChange(event: any): void {
-    
     if (event.checked) {
       const dialogRef = this.dialog.open(SmsDialogComponent, {
-        width: '500px',
+        width: '1000px',
         disableClose: true,
       });
 
       dialogRef.afterClosed().subscribe((result) => {
-        if (!result) {
-          this.form.get('tieneSMS')?.setValue(false);
+        if (result) {
+          console.log('Datos del SMS DAVId:', result);
+        } else {
+          this.form.get('tiene_sms')?.setValue(false); // desmarca si cancela
         }
       });
     }
@@ -187,13 +188,13 @@ goToNextTab(): void {
     
     
       const dialogRef = this.dialog.open(RegistroAeronavesComponent, {
-        width: '500px',
+        width: '1000px',
         disableClose: true,
       });
 
       dialogRef.afterClosed().subscribe((result) => {
-        if (!result) {
-          this.form.get('tieneSMS')?.setValue(false);
+        if (result) {
+          console.log('Datos del SMS aeronaves:', result);
         }
       });
     

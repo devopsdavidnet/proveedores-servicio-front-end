@@ -1,4 +1,87 @@
 <div class="dialog-header-line">
-  <p style="color: aliceblue" mat-dialog-title>Registro de Aeronaves</p>
+  <p style="color: aliceblue" mat-dialog-title>
+    <button
+      mat-button
+      type="button"
+      style="color: aliceblue"
+      (click)="onCancel()"
+      matTooltip="Cerrar Ventana"
+    >
+      <h2>X</h2>
+    </button>
+    Registro de Aeronaves
+  </p>
 </div>
-<button mat-button type="button" (click)="onCancel()">Cancelar</button>
+
+<mat-dialog-content class="dialog-scroll">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container">
+    <div formArrayName="aeronaves">
+      <div
+        *ngFor="let aeronave of aeronaves.controls; let i = index"
+        [formGroupName]="i"
+        class="aeronave-card"
+      >
+        <mat-card>
+          <mat-card-title
+            ><strong style="color: rgb(8, 74, 133)"
+              >Aeronave #{{ i + 1 }}</strong
+            >
+            <button
+              mat-icon-button
+              color="warn"
+              matTooltip="Eliminar Aeronave #{{ i + 1 }}"
+              (click)="removeAeronave(i)"
+              aria-label="Eliminar aeronave"
+            >
+              <mat-icon>delete</mat-icon>
+            </button></mat-card-title
+          >
+
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Matrícula</mat-label>
+            <input matInput formControlName="matricula" />
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Marca</mat-label>
+            <input matInput formControlName="marca" />
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Modelo</mat-label>
+            <input matInput formControlName="modelo" />
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Serie</mat-label>
+            <input matInput formControlName="serie" />
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Fecha de Expiración</mat-label>
+            <input matInput type="date" formControlName="fechaExpiracion" />
+          </mat-form-field>
+        </mat-card>
+      </div>
+    </div>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="button"
+      (click)="addAeronave()"
+      class="btn-adicionar"
+    >
+      <mat-icon>add</mat-icon> Adicionar Aeronave
+    </button>
+
+    <button
+      mat-raised-button
+      color="accent"
+      type="submit"
+      [disabled]="form.invalid"
+    >
+      Guardar
+    </button>
+  </form>
+</mat-dialog-content>
