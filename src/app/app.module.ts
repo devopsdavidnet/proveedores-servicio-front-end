@@ -27,7 +27,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { SmsDialogComponent } from './sms-dialog/sms-dialog.component';
 import { RegistroAeronavesComponent } from './registro-aeronaves/registro-aeronaves.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
-
+import {MatTreeModule} from '@angular/material/tree';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +48,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatListModule,
     MatCardModule,
     MatTooltipModule,
-
+MatTreeModule,
 
     
     ReactiveFormsModule,
