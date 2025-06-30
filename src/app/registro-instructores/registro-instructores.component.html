@@ -1,0 +1,63 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="formulario-dinamico">
+  <h2>Registro de Personal</h2>
+  <button
+    mat-raised-button
+    color="primary"
+    type="button"
+    (click)="addPersona()"
+  >
+    + Agregar Persona
+  </button>
+
+  <div
+    formArrayName="personal"
+    *ngFor="let persona of personalArray.controls; let i = index"
+  >
+    <mat-card class="mt-4 p-4">
+      <mat-card-title
+        ><strong>Persona #{{ i + 1 }}</strong></mat-card-title
+      >
+      <div [formGroupName]="i" class="grid gap-4 md:grid-cols-2">
+        <mat-form-field appearance="fill">
+          <mat-label>Nombres</mat-label>
+          <input matInput formControlName="nombres" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Primer Apellido</mat-label>
+          <input matInput formControlName="primerApellido" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Segundo Apellido</mat-label>
+          <input matInput formControlName="segundoApellido" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Cédula de Identidad</mat-label>
+          <input matInput formControlName="cedula" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Número de Licencia</mat-label>
+          <input matInput formControlName="licencia" />
+        </mat-form-field>
+      </div>
+
+      <div class="mt-2">
+        <button
+          mat-icon-button
+          color="warn"
+          (click)="removePersona(i)"
+          type="button"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </mat-card>
+  </div>
+
+  <div class="mt-4">
+    <button mat-raised-button color="accent" type="submit">Guardar</button>
+  </div>
+</form>

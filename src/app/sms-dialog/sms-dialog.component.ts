@@ -50,6 +50,11 @@ export class SmsDialogComponent {
   }
   */
 form: FormGroup;
+
+
+  
+
+
   expandedNodes: Set<string> = new Set();
 
   treeControl = new FlatTreeControl<TreeNode>(
@@ -66,13 +71,14 @@ form: FormGroup;
 
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private dialogRef: MatDialogRef<SmsDialogComponent>) {
     this.form = this.fb.group({
       objetivos: this.fb.array([]),
     });
     this.addObjetivo();
   }
 
+  
   get objetivos(): FormArray {
     return this.form.get('objetivos') as FormArray;
   }
@@ -246,6 +252,20 @@ getNivelAlerta2Control(i: number, j: number, k: number): FormControl {
 getNivelAlerta3Control(i: number, j: number, k: number): FormControl {
   return this.getIndicadores(i, j).at(k).get('alerta3') as FormControl;
 }
+
+onSubmit(): void {
+    if (this.form.valid) {
+       console.log("entro por si");
+      this.dialogRef.close(this.form.value);
+    } else {
+      
+      this.form.markAllAsTouched();
+    }
+  }
+
+ onCancel(): void {
+    this.dialogRef.close(null);
+  }
 
 
 }

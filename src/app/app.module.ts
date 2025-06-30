@@ -28,6 +28,7 @@ import { SmsDialogComponent } from './sms-dialog/sms-dialog.component';
 import { RegistroAeronavesComponent } from './registro-aeronaves/registro-aeronaves.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
+import { RegistroInstructoresComponent } from './registro-instructores/registro-instructores.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +36,8 @@ import {MatTreeModule} from '@angular/material/tree';
     RegistrarProveedorComponent,
     HomeComponent,
     SmsDialogComponent,
-    RegistroAeronavesComponent
+    RegistroAeronavesComponent,
+    RegistroInstructoresComponent
   ],
   imports: [
     BrowserModule,

@@ -16,3 +16,9 @@
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
 }
+
+.dialog-scroll {
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-right: 1rem;
+}

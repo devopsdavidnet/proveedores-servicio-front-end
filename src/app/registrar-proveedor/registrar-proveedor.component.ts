@@ -6,6 +6,7 @@ import { MatTabChangeEvent } from '@angular/material/tabs'; // ✅ ESTA ES LA CL
 import { MatDialog } from '@angular/material/dialog';
 import { SmsDialogComponent } from '../sms-dialog/sms-dialog.component';
 import { RegistroAeronavesComponent } from '../registro-aeronaves/registro-aeronaves.component';
+import { RegistroInstructoresComponent } from '../registro-instructores/registro-instructores.component';
 
 
 @Component({
@@ -55,18 +56,131 @@ tabEnabled: boolean[] = [true, false, false, false]; // Solo tab 0 habilitado al
        especificacion10:[''],
        especificacion11:[''],
        especificacion12:[''],
-       especificacion13:[''],
        otra_especificaciones:[''],
 
+           /*  Caracteristicas de la Organización */
+        nacionalidad_organizacion:[''],    
+        tamano_organizacion:[''],
+        complejidad_organizacion:[''],
+        capacidad1:[''],
+        capacidad2:[''],
+        capacidad3:[''],
+        capacidad4:[''],
+        capacidad5:[''],
+        capacidad6:[''],
+        capacidad7:[''],
+        capacidad8:[''],
+        otro_capacidad:[''],
+
+        tipo1:[''],
+        tipo2:[''],
+        tipo3:[''],
+        tipo4:[''],
+        tipo5:[''],
+          
+        certificado1:[''],
+        fecha_expiracion_certificado1:[''],
+         certificado2:[''], 
+         fecha_expiracion_certificado2:[''],
+         certificado3:[''],
+         fecha_expiracion_certificado3:[''],
+         certificado4:[''],
+         fecha_expiracion_certificado4:[''],
+         certificado5:[''],
+         fecha_expiracion_certificado5:[''],
+         certificado6:[''], 
+         fecha_expiracion_certificado6:[''],
+
+certificado7:[''],
+fecha_expiracion_certficado7:[''],
+certificado8:[''],
+fecha_expiracion_certificado8:[''],
+certificado9:[''],
+fecha_expiracion_certificado9:[''],
+certificado10:[''],
+fecha_expiracion_certificado10:[''],
+certificado11:[''],
+fecha_expiracion_certificado11:[''],
+certificado12:[''],
+fecha_expiracion_certificado12:[''],
+certificado13:[''],
+fecha_expiracion_certificado13:[''],
+certificado14:[''],
+fecha_expiracion_certificado14:[''],
+certificado15:[''],
+fecha_expiracion_certificado15:[''],
+certificado16:[''],
+fecha_expiracion_certificacion16:[''],
+certificado17:[''],
+fecha_expiracion_certificacion17:[''],
+ /* Dato del Directorio y tecnico*/
+
+  nombre_gerente_responsable:[''],
+   telefono_gerente_responsable:[''],
+   correo_gerente_responsable:[''],
+   fecha_designacion_gerente_responsable:[''],
+
+    nombre_responsable_operaciones:[''],
+    telefono_responsable_operaciones:[''],
+    correo_responsable_operaciones:[''],
+    fecha_desigancion_responsable_operaciones:[''],
+
+    nombre_responsable_mantenimiento:[''],
+    telefono_responsable_mantenimineto:[''],
+    correo_responsable_mantenimiento:[''],
+    fecha_designacion_responsable_mantenimiento:[''],
+
+    nombre_responsable_sms:[''],
+    telefono_responsable_sms:[''],
+    correo_responsable_sms:[],
+    fecha_designacion_responsable_sms:[''],
+
+    nombre_responsable_calidad:[''],
+    telefono_responsable_calidad:[''],
+    
+    correo_responsable_calidad:[''],
+    fecha_designacion_responsable_calidad:[''],
+
+    nombre_jefe_piloto:[''],
+    telefono_jefe_piloto:[''],
+    correo_jefe_piloto:[''],
+    fecha_designacion_jefe_piloto:[''],
+
+nombre_jefe_instruccion:[''],
+telefono_jefe_instruccion:[''],
+correo_jefe_instruccion:[''],
+fecha_designacion_jefe_instruccion:[''],
 
 
 
-      email: ['', [Validators.required, Validators.email]],
+
+ nombre_jefe_vuelo:[''],
+ telefono_jefe_vuelo:[''],
+ correo_jefe_vuelo:[''],
+ fecha_designacion_jefe_vuelo:[''],
+
+
+nombre_jefe_instruccion_teorica:[''],
+telefono_jefe_instruccion_teorica:[''],
+correo_jefe_instruccion_teorica:[''],
+fecha_designacion_jefe_instrucion_teorica:[''],
+
+
+nombre_aistente_instructor:[''],
+telefono_asistente_instructor:[''],
+correo_asistente_instructor:[''],
+fecha_designacion_asistente_instructor:[''],
+
+
+
+
+    /*  email: ['', [Validators.required, Validators.email]],
       telefono: ['', Validators.required],
       
       ciudad: ['', Validators.required],
-      pais: ['', Validators.required]
+      pais: ['', Validators.required]*/
     });
+
   }
   ngOnInit(): void {
     throw new Error('Method not implemented.');
@@ -176,7 +290,7 @@ goToNextTab(): void {
 
       dialogRef.afterClosed().subscribe((result) => {
         if (result) {
-          console.log('Datos del SMS DAVId:', result);
+          console.log('Datos del objetivo y metas e indicadores:', result);
         } else {
           this.form.get('tiene_sms')?.setValue(false); // desmarca si cancela
         }
@@ -194,11 +308,32 @@ goToNextTab(): void {
 
       dialogRef.afterClosed().subscribe((result) => {
         if (result) {
+          console.log('hola como estas ');
           console.log('Datos del SMS aeronaves:', result);
         }
       });
     
   }
+registroInstructores(): void {
+    
+    
+      const dialogRef = this.dialog.open(RegistroInstructoresComponent, {
+        width: '1000px',
+        disableClose: true,
+      });
+
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          console.log('hola como estas ');
+          console.log('Datos del SMS aeronaves instructors:', result);
+        }
+      });
+    
+  }
+
+
+
+
 
   onSubmit(): void {
     if (this.form.valid) {
