@@ -1,5 +1,5 @@
 <form [formGroup]="form">
-  <mat-tab-group [(selectedIndex)]="selectedIndex" animationDuration="800ms">
+  <mat-tab-group [(selectedIndex)]="selectedIndex" animationDuration="500ms">
     <!-- TAB 1 -->
     <mat-tab
       [disabled]="!tabEnabled[0]"
@@ -1092,11 +1092,11 @@
             (click)="registroInstructores()"
           >
             <img
-              src="assets/images/jet_plane_1.png"
+              src="assets/images/teacher.png"
               alt="Adicionar"
               class="btn-icon"
             />
-            Registrar Datos de Aeronaves
+            Registrar Personal Certificado
           </button>
         </div>
 

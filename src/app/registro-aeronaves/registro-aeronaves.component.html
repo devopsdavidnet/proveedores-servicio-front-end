@@ -12,6 +12,9 @@
     Registro de Aeronaves
   </p>
 </div>
+<button mat-raised-button color="primary" type="button" (click)="addAeronave()">
+  <mat-icon>add</mat-icon> Adicionar Aeronave
+</button>
 
 <mat-dialog-content class="dialog-scroll">
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container">
@@ -64,16 +67,6 @@
         </mat-card>
       </div>
     </div>
-
-    <button
-      mat-raised-button
-      color="primary"
-      type="button"
-      (click)="addAeronave()"
-      class="btn-adicionar"
-    >
-      <mat-icon>add</mat-icon> Adicionar Aeronave
-    </button>
 
     <button
       mat-raised-button

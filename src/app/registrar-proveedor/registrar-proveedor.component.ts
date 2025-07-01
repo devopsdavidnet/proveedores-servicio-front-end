@@ -123,7 +123,8 @@ fecha_expiracion_certificacion17:[''],
     nombre_responsable_operaciones:[''],
     telefono_responsable_operaciones:[''],
     correo_responsable_operaciones:[''],
-    fecha_desigancion_responsable_operaciones:[''],
+    fecha_designacion_responsable_operaciones:[''],
+    
 
     nombre_responsable_mantenimiento:[''],
     telefono_responsable_mantenimineto:[''],
@@ -140,6 +141,8 @@ fecha_expiracion_certificacion17:[''],
     
     correo_responsable_calidad:[''],
     fecha_designacion_responsable_calidad:[''],
+
+    
 
     nombre_jefe_piloto:[''],
     telefono_jefe_piloto:[''],
@@ -216,10 +219,11 @@ onTabChange(event: any): void {
 
 
 goToNextTab(): void {
-  if (this.validateCurrentTab() && this.selectedIndex < this.tabEnabled.length - 1) {
+  /*if (this.validateCurrentTab() && this.selectedIndex < this.tabEnabled.length - 1) {
     this.tabEnabled[this.selectedIndex + 1] = true; // Habilita siguiente tab
     this.selectedIndex++;
-  }
+  }*/
+   this.selectedIndex++;
 }
 
 /*
@@ -323,9 +327,10 @@ registroInstructores(): void {
       });
 
       dialogRef.afterClosed().subscribe((result) => {
+        console.log("ddddddddddddddddddddd");
         if (result) {
           console.log('hola como estas ');
-          console.log('Datos del SMS aeronaves instructors:', result);
+          console.log('Datos del instructors:', result);
         }
       });
     
@@ -336,10 +341,12 @@ registroInstructores(): void {
 
 
   onSubmit(): void {
-    if (this.form.valid) {
+    //if (this.form.valid) {
+
+
       console.log('Formulario completo:', this.form.value);
-    } else {
+   /* } else {
       this.form.markAllAsTouched();
-    }
+    }*/
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-registro-instructores',
   templateUrl: './registro-instructores.component.html',
@@ -9,7 +10,7 @@ export class RegistroInstructoresComponent implements OnInit  {
 
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private dialogRef: MatDialogRef<RegistroInstructoresComponent>) {
     this.form = this.fb.group({
       personal: this.fb.array([])
     });
@@ -42,10 +43,15 @@ export class RegistroInstructoresComponent implements OnInit  {
   onSubmit(): void {
     if (this.form.valid) {
       console.log(this.form.value);
-      alert('Formulario enviado correctamente');
+      this.dialogRef.close(this.form.value);
+     // alert('Formulario enviado correctamente');
     } else {
       this.form.markAllAsTouched();
     }
+  }
+
+   onCancel(): void {
+    this.dialogRef.close(null);
   }
 
 }

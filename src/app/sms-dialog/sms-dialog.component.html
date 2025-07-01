@@ -12,7 +12,11 @@
     Registro de Objetivos Metas e Inidicadors
   </p>
 </div>
-<!--
+<!-- mat-raised-button
+  color="primary"
+  type="button"
+  (click)="addAeronave()"
+  class="btn-adicionar"
 <form [formGroup]="smsForm" (ngSubmit)="onSubmit()" class="dialog-form">
   <mat-form-field appearance="fill" class="full-width">
     <mat-label>Responsable del SMS</mat-label>
@@ -47,11 +51,10 @@
   </div>
 </form>
 -->
-
+<button mat-raised-button color="primary" (click)="addObjetivo()">
+  + Objetivo
+</button>
 <mat-card class="dialog-scroll">
-  <button mat-raised-button color="primary" (click)="addObjetivo()">
-    + Objetivo
-  </button>
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="dialog-form">
     <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
       <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
